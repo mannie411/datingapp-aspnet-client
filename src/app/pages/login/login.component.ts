@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authService.login(this.model)
       .subscribe(
         data => this.router.navigateByUrl('/dashboard'),
-        error => console.log('Login Failed'));
+        error => console.log(error));
   }
 
   isLoggedIn() {

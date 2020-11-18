@@ -1,5 +1,6 @@
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
@@ -33,12 +34,35 @@ export class AuthService {
 
           }
 
-        }));
+        }),
+        catchError(this.handleError)
+      );
   }
 
   register(model: any) {
 
-    return this.http.post(`${this.authApi}register`, model, this.options);
+    return this.http.post(`${this.authApi}register`, model, this.options)
+      .pipe(catchError(this.handleError));
+  }
+
+  private handleError(err: HttpErrorResponse) {
+
+    const appErr = err.headers.get('Application-Error');
+
+    if (appErr) {
+      return throwError(appErr);
+    }
+
+    let modelStateErr = '';
+    if (err) {
+      for (const key in err.error) {
+        if (err.error[key]) {
+          modelStateErr += err.error[key] + '\n';
+        }
+      }
+    }
+
+    return throwError(modelStateErr || 'Internal Server Error');
   }
 
 
