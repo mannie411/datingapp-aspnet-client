@@ -21,26 +21,15 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets/fonts/FontAwesome.otf",
-              "src/assets/fonts/fontawesome-webfont.svg",
-              "src/assets/fonts/fontawesome-webfont.ttf",
-              "src/assets/fonts/fontawesome-webfont.eot",
-              "src/assets/fonts/fontawesome-webfont.woff",
-              "src/assets/fonts/fontawesome-webfont.woff2",
-              "src/assets/fonts/nucleo-icons.otf",
-              "src/assets/fonts/nucleo-icons.svg",
-              "src/assets/fonts/nucleo-icons.ttf",
-              "src/assets/fonts/nucleo-icons.eot",
-              "src/assets/fonts/nucleo-iconst.woff",
-              "src/assets/fonts/nucleo-icons.woff2"
+              "src/assets"
             ],
             "styles": [
               "src/styles.css",
               "src/assets/css/font-awesome.min.css",
               "src/assets/css/bootstrap.min.css",
               "src/assets/css/nucleo.css",
-              "src/assets/css/nucleo-svg.css",
-              "src/assets/css/argon-design-system-react.min.css"
+              "src/assets/css/nucleo-svg.css"
+              
             ],
             "scripts": [
               "src/assets/js/jquery.min.js",
