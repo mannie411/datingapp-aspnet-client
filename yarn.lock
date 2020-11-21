@@ -241,6 +241,13 @@
   dependencies:
     tslib "^2.0.0"
 
+"@auth0/angular-jwt@^5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@auth0/angular-jwt/-/angular-jwt-5.0.2.tgz#0a23f240e8c6ed37c5c7a354ad79a755a217936e"
+  integrity sha512-rSamC9mu+gUxoR86AXcIo+KD7xRIro+/iu1F2Ld85YAZEVKlpB5vYG+g0yGaEOqjtQWP/i0H6fi6XMGPVHSYYQ==
+  dependencies:
+    tslib "^2.0.0"
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.8.3":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.10.4.tgz#168da1a36e90da68ae8d49c0f1b48c7c6249213a"
@@ -5813,6 +5820,11 @@ next-tick@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
   integrity sha1-yobR/ogoFpsBICCOPchCS524NCw=
+
+ng-snotify@^9.0.1:
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/ng-snotify/-/ng-snotify-9.0.1.tgz#b8b430a3c5d481bd7e30e23f692b078109f904ae"
+  integrity sha512-NYNtXHGiuBOYz+3/1k/l32IXmlrRNFbK9Z+nQM0dg6HWS+HZpPW84mvOBFLdxYTgzq8+SA6NXaEG4wAgMtFTeg==
 
 ngx-clipboard@^14.0.1:
   version "14.0.1"

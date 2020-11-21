@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SnotifyService } from 'ng-snotify';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class RegisterComponent implements OnInit {
 
   model: any = {};
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private snotitfyService: SnotifyService) { }
 
   ngOnInit() {
 
@@ -18,8 +19,8 @@ export class RegisterComponent implements OnInit {
 
   register() {
     this.authService.register(this.model).subscribe(
-      () => console.log('Registration Successful'),
-      error => console.log(error));
+      () => this.snotitfyService.success('Registration Successful'),
+      error => this.snotitfyService.error(error));
   }
 
   cancelled() {

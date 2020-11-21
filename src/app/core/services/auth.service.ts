@@ -1,7 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,9 @@ export class AuthService {
   authApi = 'http://localhost:5000/api/auth/';
   userToken: any;
   public redirectUrl: string;
+  jwtHelper: JwtHelperService = new JwtHelperService();
+  decodedToken: any;
+
 
   constructor(private http: HttpClient) { }
 
@@ -29,7 +33,9 @@ export class AuthService {
 
           if (r) {
             localStorage.setItem('token', r.tokenString);
-            localStorage.setItem('isLoggedIn', 'true');
+            // localStorage.setItem('token', r.tokenString);
+            this.decodedToken = this.jwtHelper.decodeToken(r.tokenString);
+            console.log(this.decodedToken);
             this.userToken = r.tokenString;
 
           }
@@ -63,6 +69,22 @@ export class AuthService {
     }
 
     return throwError(modelStateErr || 'Internal Server Error');
+  }
+
+  isLoggedIn(): boolean {
+
+    const token = localStorage.getItem('token');
+    if (token != null) {
+      return this.jwtHelper.isTokenExpired(token);
+    }
+    return true;
+  }
+
+  decodeToken() {
+    const token = localStorage.getItem('token');
+    if (token != null) {
+      this.decodedToken = this.jwtHelper.decodeToken(token);
+    }
   }
 
 

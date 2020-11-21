@@ -13,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AuthService } from './core/services/auth.service';
+import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 
 
 @NgModule({
@@ -24,14 +25,19 @@ import { AuthService } from './core/services/auth.service';
     NgbModule,
     RouterModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    SnotifyModule,
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
+    SnotifyService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

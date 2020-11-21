@@ -16,7 +16,7 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'admin',
+    path: 'user',
     component: AdminLayoutComponent,
     children: [
       {

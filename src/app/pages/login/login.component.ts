@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { SnotifyService } from 'ng-snotify';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 
@@ -11,7 +12,9 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class LoginComponent implements OnInit, OnDestroy {
   model: any = {};
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService,
+    private router: Router,
+    private snotitfyService: SnotifyService) { }
 
   ngOnInit() {
     this.isLoggedIn();
@@ -24,16 +27,19 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authService.login(this.model)
       .subscribe(
         data => this.router.navigateByUrl('/dashboard'),
-        error => console.log(error));
+        error => this.snotitfyService.error(error)
+      );
   }
 
   isLoggedIn() {
 
-    const token = localStorage.getItem('token');
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
-    if (token != null || isLoggedIn != null) {
-      this.router.navigate(['/dashboard']);
+    const valid = this.authService.isLoggedIn();
+
+    if (valid === false) {
+      this.router.navigate(['admin/dashboard']);
     }
+
+
   }
 
 
