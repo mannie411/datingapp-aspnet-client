@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   login() {
     this.authService.login(this.model)
       .subscribe(
-        data => this.router.navigateByUrl('/dashboard'),
+        data => this.router.navigateByUrl('user/dashboard'),
         error => this.snotitfyService.error(error)
       );
   }
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     const valid = this.authService.isLoggedIn();
 
     if (valid === false) {
-      this.router.navigate(['admin/dashboard']);
+      this.router.navigate(['user/dashboard']);
     }
 
 

@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { environment as env } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  authApi = 'http://localhost:5000/api/auth/';
+  apiUrl = env.apiUrl;
   userToken: any;
   public redirectUrl: string;
   jwtHelper: JwtHelperService = new JwtHelperService();
@@ -26,17 +27,15 @@ export class AuthService {
 
   login(model: any) {
 
-    return this.http.post(`${this.authApi}login`, model, this.options)
+    return this.http.post(`${this.apiUrl}auth/login`, model, this.options)
       .pipe(
         map((res: HttpResponse<any>) => {
           const r = res.body;
 
           if (r) {
-            localStorage.setItem('token', r.tokenString);
-            // localStorage.setItem('token', r.tokenString);
-            this.decodedToken = this.jwtHelper.decodeToken(r.tokenString);
-            console.log(this.decodedToken);
-            this.userToken = r.tokenString;
+            localStorage.setItem('token', r.token);
+            this.decodedToken = this.jwtHelper.decodeToken(r.token);
+            this.userToken = r.token;
 
           }
 
@@ -47,7 +46,7 @@ export class AuthService {
 
   register(model: any) {
 
-    return this.http.post(`${this.authApi}register`, model, this.options)
+    return this.http.post(`${this.apiUrl}auth/register`, model, this.options)
       .pipe(catchError(this.handleError));
   }
 

@@ -14,6 +14,10 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AuthService } from './core/services/auth.service';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
+import { UserService } from './core/services/user.service';
+import { JwtModule } from '@auth0/angular-jwt';
+import { MemberDetailResolver } from './core/resolvers/members-detail.resolver';
+import { MemberListResolver } from './core/resolvers/members-list.resolver';
 
 
 @NgModule({
@@ -27,6 +31,14 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
     AppRoutingModule,
     FormsModule,
     SnotifyModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem('token'),
+        allowedDomains: ['localhost:5000'],
+        throwNoTokenError: true,
+
+      },
+    }),
   ],
   declarations: [
     AppComponent,
@@ -36,7 +48,10 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
   providers: [
     AuthService,
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
-    SnotifyService
+    SnotifyService,
+    UserService,
+    MemberDetailResolver,
+    MemberListResolver,
   ],
   bootstrap: [AppComponent]
 })

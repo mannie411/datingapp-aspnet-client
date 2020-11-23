@@ -1,0 +1,17 @@
+<div class="card-container  mb-4 mb-xl-0" [routerLink]="[user.id]" >
+  <div class="cover-photo">
+    <img
+      src="{{user.photoUrl}}"
+      class="profile">
+  </div>
+  <div class="profile-name">{{user.knownAs}}</div>
+  <p class="about">User Interface Designer and<br>front-end developer</p>
+  <button class="msg-btn">Message</button>
+  <button class="follow-btn">Following</button>
+  <div>
+    <i class="fa fa-facebook-f"></i>
+    <i class="fa fa-instagram"></i>
+    <i class="fa fa-youtube"></i>
+    <i class="fa fa-twitter"></i>
+  </div>
+</div>
