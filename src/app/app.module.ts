@@ -18,6 +18,7 @@ import { UserService } from './core/services/user.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { MemberDetailResolver } from './core/resolvers/members-detail.resolver';
 import { MemberListResolver } from './core/resolvers/members-list.resolver';
+import { MemberEditResolver } from './core/resolvers/member-edit.resolver';
 
 
 @NgModule({
@@ -33,8 +34,16 @@ import { MemberListResolver } from './core/resolvers/members-list.resolver';
     SnotifyModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => localStorage.getItem('token'),
+        tokenGetter: () => {
+          const token = localStorage.getItem('token');
+          if (token != null) { return token; }
+          return '';
+
+        },
         allowedDomains: ['localhost:5000'],
+        disallowedRoutes: [
+          '//localhost:5000/api/auth'
+        ],
         throwNoTokenError: true,
 
       },
@@ -52,6 +61,7 @@ import { MemberListResolver } from './core/resolvers/members-list.resolver';
     UserService,
     MemberDetailResolver,
     MemberListResolver,
+    MemberEditResolver,
   ],
   bootstrap: [AppComponent]
 })

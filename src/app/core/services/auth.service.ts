@@ -4,6 +4,7 @@ import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { environment as env } from 'src/environments/environment';
+import { DecodedToken } from '../models/DecodedToken';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthService {
   userToken: any;
   public redirectUrl: string;
   jwtHelper: JwtHelperService = new JwtHelperService();
-  decodedToken: any;
+  decodedToken: DecodedToken;
 
 
   constructor(private http: HttpClient) { }

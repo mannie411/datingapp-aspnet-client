@@ -11,10 +11,17 @@ import { MessagesComponent } from 'src/app/pages/messages/messages.component';
 import { MemberDetailComponent } from 'src/app/pages/members/member-detail/member-detail.component';
 import { MemberDetailResolver } from 'src/app/core/resolvers/members-detail.resolver';
 import { MemberListResolver } from 'src/app/core/resolvers/members-list.resolver';
+import { MemberEditResolver } from 'src/app/core/resolvers/member-edit.resolver';
+import { UnsavedGuardService } from 'src/app/core/guards/unsaved-guard.service';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
-    { path: 'user-profile', component: UserProfileComponent },
+    { path: 'profile', component: UserProfileComponent, resolve: { user: MemberEditResolver } },
+    {
+        path: 'profile/edit', component: UserProfileComponent,
+        resolve: { user: MemberEditResolver },
+        canDeactivate: [UnsavedGuardService]
+    },
     { path: 'tables', component: TablesComponent },
     { path: 'icons', component: IconsComponent },
     { path: 'maps', component: MapsComponent },
