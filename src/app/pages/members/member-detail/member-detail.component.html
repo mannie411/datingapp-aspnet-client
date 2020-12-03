@@ -24,7 +24,7 @@
           <div class="col-lg-3 order-lg-2">
             <div class="card-profile-image">
               <a href="javascript:void(0)">
-                <img src="{{user?.photoUrl}}" class="rounded-circle">
+                <img src="{{user?.photoUrl ? user.photoUrl : defaultImg}}" class="rounded-circle">
               </a>
             </div>
           </div>

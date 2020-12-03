@@ -39,35 +39,152 @@
           <div class="text-center text-muted mb-4">
             <small>Or sign up with credentials</small>
           </div>
-          <form role="form" #registerForm (ngSubmit)="register()">
+          <form role="form" [formGroup]="registerForm" (ngSubmit)="register()">
+            <!-- Username -->
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fa fa-user"></i></span>
                 </div>
-                <input class="form-control" placeholder="Username" type="text" required name="username"
-                  [(ngModel)]="model.username">
+                <input class="form-control " [ngClass]="{'is-invalid' : 
+                registerForm.get('username').errors && registerForm.get('username').touched,
+                'is-valid' : registerForm.get('username').valid 
+              }" [placeholder]="registerForm.get('username').errors && registerForm.get('username').touched
+                ? 'Username is required'
+                : 'Username'" type="text" formControlName="username">
               </div>
+
             </div>
-            <!-- <div class="form-group">
-              <div class="input-group input-group-alternative mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                </div>
-                <input class="form-control" placeholder="Email" type="email">
-              </div>
-            </div> -->
+            <!-- Password -->
             <div class="form-group">
               <div class="input-group input-group-alternative">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                 </div>
-                <input class="form-control" placeholder="Password" type="password" required name="password"
-                  [(ngModel)]="model.password">
+                <input class="form-control" [ngClass]="{'is-invalid' : 
+                registerForm.get('password').errors && registerForm.get('password').touched, 'is-valid' : 
+                registerForm.get('password').valid  }" [placeholder]="
+                registerForm.get('password').errors && registerForm.get('password').touched
+                ? 'Password is required'
+                : 'Password'
+                " type="password" formControlName="password">
+              </div>
+              <div class="form-text"
+                *ngIf="registerForm.get('password').hasError('minlength') && registerForm.get('password').touched ">
+                <span class="input-group-text">Password must be more than 8 characters</span>
+              </div>
+
+            </div>
+            <!-- Confirm password -->
+            <div class="form-group">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                </div>
+                <input class="form-control" [ngClass]="{'is-invalid' : 
+                registerForm.get('confirmPass').errors && registerForm.get('confirmPass').touched ||
+                registerForm.get('confirmPass').touched && registerForm.hasError('mismatch') ,
+                'is-valid' : registerForm.get('confirmPass').valid 
+                   }" [placeholder]="registerForm.get('confirmPass').errors 
+                && registerForm.get('confirmPass').touched
+                ? 'Confirm Password is required'
+                : 'Confirm Password'
+                " type="password" formControlName="confirmPass">
+
+              </div>
+              <div class="form-text"
+                *ngIf="registerForm.get('confirmPass').touched && registerForm.hasError('mismatch')">
+                <span class="input-group-text">Confirm password does not match</span>
               </div>
             </div>
-            <div class="text-muted font-italic"><small>password strength: <span
-                  class="text-success font-weight-700">strong</span></small></div>
+            <!-- Gender -->
+            <div class="form-group">
+              <!-- <div class="custom-control custom-control-inline">
+                <label class="">
+                  <i class="ni ni-lock-circle-open"></i>
+                  I am:</label>
+              </div> -->
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline1" formControlName="gender" value="Male"
+                  class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline1">Male <i class="fa fa-mars"></i> </label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline2" formControlName="gender" value="Female"
+                  class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline2">Female <i class="fa fa-venus"></i></label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline3" formControlName="gender" value="Others"
+                  class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline3">Others <i
+                    class="fa fa-venus-mars"></i></label>
+              </div>
+            </div>
+            <!-- DOB -->
+            <div class="form-group">
+              <div class="input-group">
+                <input class="form-control" [ngClass]="{'is-invalid' : 
+                registerForm.get('dob').errors && registerForm.get('dob').touched,
+                'is-valid' : registerForm.get('country').valid 
+              }" [placeholder]="registerForm.get('dob').errors && registerForm.get('dob').touched
+                ? 'Date of birth is required'
+                : 'yyyy-mm-dd'" name="dp" formControlName="dob" ngbDatepicker #d="ngbDatepicker">
+                <div class="input-group-append">
+                  <button class="input-group-text ni ni-calendar-grid-58" (click)="d.toggle()" type="button">
+
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- KnownAs -->
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
+                </div>
+                <input class="form-control " [ngClass]="{'is-invalid' : 
+                registerForm.get('knownAs').errors && registerForm.get('knownAs').touched,
+                'is-valid' : registerForm.get('knownAs').valid 
+              }" [placeholder]="registerForm.get('knownAs').errors && registerForm.get('knownAs').touched
+                ? 'knownAs is required'
+                : 'John Doe'" type="text" formControlName="knownAs">
+              </div>
+
+            </div>
+            <!-- City -->
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fa fa-home"></i></span>
+                </div>
+                <input class="form-control " [ngClass]="{'is-invalid' : 
+                registerForm.get('city').errors && registerForm.get('city').touched,
+                'is-valid' : registerForm.get('city').valid 
+              }" [placeholder]="registerForm.get('city').errors && registerForm.get('city').touched
+                ? 'city is required'
+                : 'New York'" type="text" formControlName="city">
+              </div>
+
+            </div>
+            <!-- Country -->
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fa fa-flag"></i></span>
+                </div>
+                <input class="form-control " [ngClass]="{'is-invalid' : 
+                registerForm.get('country').errors && registerForm.get('country').touched,
+                'is-valid' : registerForm.get('country').valid 
+              }" [placeholder]="registerForm.get('city').errors && registerForm.get('country').touched
+                ? 'Country is required'
+                : 'Austria'" type="text" formControlName="country">
+              </div>
+
+            </div>
+
+            <!-- <div class="text-muted font-italic"><small>password strength: <span
+                  class="text-success font-weight-700">strong</span></small></div> -->
             <div class="row my-4">
               <div class="col-12">
                 <div class="custom-control custom-control-alternative custom-checkbox">
@@ -79,7 +196,8 @@
               </div>
             </div>
             <div class="text-center">
-              <button type="submit" class="btn btn-primary mt-4">Create account</button>
+              <button type="submit" [disabled]="!registerForm.valid" class="btn btn-primary mt-4">Create
+                account</button>
             </div>
           </form>
         </div>

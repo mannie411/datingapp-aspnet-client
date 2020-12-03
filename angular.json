@@ -27,9 +27,9 @@
               "src/styles.css",
               "src/assets/css/argon.css",
               "src/assets/css/font-awesome.min.css",
-              "src/assets/css/bootstrap.min.css",
               "src/assets/css/nucleo.css",
               "src/assets/css/nucleo-svg.css",
+              "src/assets/css/bootstrap.min.css",
               "src/assets/css/snotify-material.css"
             ],
             "scripts": [

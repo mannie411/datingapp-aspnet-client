@@ -1,4 +1,9 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+  HttpResponse,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -6,12 +11,12 @@ import { environment as env } from 'src/environments/environment';
 import { User } from '../models/User';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
   apiUrl = env.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   // options = {
   //   headers: new HttpHeaders({
@@ -30,13 +35,30 @@ export class UserService {
   }
 
   getUser(id): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}users/${id}`).pipe(
-      catchError(this.handleError)
-    );
+    return this.http
+      .get<User>(`${this.apiUrl}users/${id}`)
+      .pipe(catchError(this.handleError));
   }
 
   updateUser(id: number, user: User) {
-    return this.http.put(`${this.apiUrl}users/${id}`, user).pipe(catchError(this.handleError));
+    return this.http
+      .put(`${this.apiUrl}users/${id}`, user)
+      .pipe(catchError(this.handleError));
+  }
+
+  deletePhoto(userId: number, photoId: number) {
+    return this.http
+      .delete(`${this.apiUrl}users/${userId}/photo/${photoId}`)
+      .pipe(
+        map((r: any) => r.message),
+        catchError(this.handleError)
+      );
+  }
+
+  setMainPhoto(userId: number, photoId: number) {
+    return this.http
+      .post(`${this.apiUrl}users/${userId}/photo/setmain/${photoId}`, {})
+      .pipe(catchError(this.handleError));
   }
 
   // private jwt() {
@@ -49,7 +71,6 @@ export class UserService {
   // }
 
   private handleError(err: HttpErrorResponse) {
-
     const appErr = err.headers.get('Application-Error');
 
     if (appErr) {
@@ -67,5 +88,4 @@ export class UserService {
 
     return throwError(modelStateErr || 'Internal Server Error');
   }
-
 }

@@ -1,6 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -19,7 +19,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { MemberDetailResolver } from './core/resolvers/members-detail.resolver';
 import { MemberListResolver } from './core/resolvers/members-list.resolver';
 import { MemberEditResolver } from './core/resolvers/member-edit.resolver';
-
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   imports: [
@@ -27,33 +27,32 @@ import { MemberEditResolver } from './core/resolvers/member-edit.resolver';
     FormsModule,
     HttpClientModule,
     ComponentsModule,
-    NgbModule,
     RouterModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
     SnotifyModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {
           const token = localStorage.getItem('token');
-          if (token != null) { return token; }
+          if (token != null) {
+            return token;
+          }
           return '';
-
         },
         allowedDomains: ['localhost:5000'],
         disallowedRoutes: [
-          '//localhost:5000/api/auth'
+          'http://localhost:5000/api/auth/login',
+          'http://localhost:5000/api/auth/register',
         ],
         throwNoTokenError: true,
-
       },
     }),
+    FileUploadModule,
   ],
-  declarations: [
-    AppComponent,
-    AdminLayoutComponent,
-    AuthLayoutComponent
-  ],
+  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
   providers: [
     AuthService,
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
@@ -63,6 +62,6 @@ import { MemberEditResolver } from './core/resolvers/member-edit.resolver';
     MemberListResolver,
     MemberEditResolver,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

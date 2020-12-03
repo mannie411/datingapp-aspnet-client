@@ -8,19 +8,22 @@ import { UserService } from 'src/app/core/services/user.service';
 @Component({
   selector: 'app-member-detail',
   templateUrl: './member-detail.component.html',
-  styleUrls: ['./member-detail.component.css']
+  styleUrls: ['./member-detail.component.css'],
 })
 export class MemberDetailComponent implements OnInit {
   user: User;
   active = 1;
+  defaultImg = '../../../../assets/img/theme/user.png';
 
-  constructor(private userService: UserService,
+  constructor(
+    private userService: UserService,
     private route: ActivatedRoute,
-    private snotifyService: SnotifyService) { }
+    private snotifyService: SnotifyService
+  ) {}
 
   ngOnInit() {
     // this.getUser();
-    this.route.data.subscribe(data => {
+    this.route.data.subscribe((data) => {
       this.user = data.user;
     });
   }
@@ -33,5 +36,4 @@ export class MemberDetailComponent implements OnInit {
   //     error => this.snotifyService.error(error)
   //   );
   // }
-
 }

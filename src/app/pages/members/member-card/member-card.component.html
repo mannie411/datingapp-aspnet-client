@@ -1,8 +1,6 @@
-<div class="card-container  mb-4 mb-xl-0" [routerLink]="[user.id]" >
+<div class="card-container  mb-4 mb-xl-0" [routerLink]="[user.id]">
   <div class="cover-photo">
-    <img
-      src="{{user.photoUrl}}"
-      class="profile">
+    <img src="{{user.photoUrl ? user.photoUrl : defaultImg}}" class="profile">
   </div>
   <div class="profile-name">{{user.knownAs}}</div>
   <p class="about">User Interface Designer and<br>front-end developer</p>

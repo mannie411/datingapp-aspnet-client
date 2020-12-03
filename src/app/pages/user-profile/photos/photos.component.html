@@ -1,0 +1,97 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm col-md m-2 " *ngFor="let photo of photos">
+      <div class="box-container">
+        <div class="p-card">
+          <div class="pic"><img src="{{photo.url}}" alt="profile-picture" title="Someone Famous" /></div>
+          <div class="social">
+            <button class="b-btn m-1" href="#" placement="top" ngbTooltip="Set as profile picture"
+              (click)="setMainPhoto(photo)" [disabled]="photo.isMain"
+              [ngClass]="photo.isMain ? 'bg-info active' : 'bg-secondary' ">
+              <i class="ni ni-check-bold ni-lg "></i> </button>
+            <button class="b-btn bg-danger m-1" href="#" placement="top" ngbTooltip="Delete photo"
+              (click)="deletePhoto(photo.id)">
+              <i class="ni ni-fat-delete ni-lg "></i> </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="card">
+    <div class="row">
+
+      <div class="col-8">
+        <div class="m-2 p-2">
+          <h3 class="h3"> Add Photos</h3>
+        </div>
+
+        <div class="m-2 p-2 file-drop-area">
+          <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)"
+            [uploader]="uploader" class="well my-drop-zone ">
+            Drop photo here
+          </div>
+        </div>
+
+        <div class="m-2 p-2">
+          Multiple
+          <input type="file" ng2FileSelect [uploader]="uploader" multiple /><br />
+        </div>
+
+        <div class="m-2 p-2">
+          Single
+          <input type="file" ng2FileSelect [uploader]="uploader" />
+        </div>
+      </div>
+
+      <div class="col-4" *ngIf="uploader?.queue?.length">
+
+        <h3>Upload queue</h3>
+        <p>Queue length: {{ uploader?.queue?.length }}</p>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th width="50%">Name</th>
+              <th>Size</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of uploader.queue">
+              <td><strong>{{ item?.file?.name }}</strong></td>
+              <td *ngIf="uploader.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+
+            </tr>
+          </tbody>
+        </table>
+
+        <div>
+          <div>
+            Queue progress:
+            <div class="progress" style="">
+              <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()"
+            [disabled]="!uploader.getNotUploadedItems().length">
+            <span class="fa fa-upload"></span> Upload all
+          </button>
+          <button type="button" class="btn btn-warning btn-s" (click)="uploader.cancelAll()"
+            [disabled]="!uploader.isUploading">
+            <span class="fa fa-ban-circle"></span> Cancel all
+          </button>
+          <button type="button" class="btn btn-danger btn-s" (click)="uploader.clearQueue()"
+            [disabled]="!uploader.queue.length">
+            <span class="fa fa-trash"></span> Remove all
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

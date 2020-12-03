@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http'; import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -11,10 +12,12 @@ import { IconsComponent } from '../../pages/icons/icons.component';
 import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { TablesComponent } from '../../pages/tables/tables.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import { MemberListComponent } from 'src/app/pages/members/member-list/member-list.component';
 import { MemberCardComponent } from 'src/app/pages/members/member-card/member-card.component';
 import { MemberDetailComponent } from 'src/app/pages/members/member-detail/member-detail.component';
+import { PhotosComponent } from 'src/app/pages/user-profile/photos/photos.component';
+import { FileUploadModule } from 'ng2-file-upload';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -22,20 +25,23 @@ import { MemberDetailComponent } from 'src/app/pages/members/member-detail/membe
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
-    ClipboardModule
+    ClipboardModule,
+    FileUploadModule,
+    NgbModule,
   ],
   declarations: [
     DashboardComponent,
     UserProfileComponent,
+    PhotosComponent,
     TablesComponent,
     IconsComponent,
     MapsComponent,
     MemberListComponent,
     MemberCardComponent,
-    MemberDetailComponent
-  ]
+    MemberDetailComponent,
+  ],
 })
-
-export class AdminLayoutModule { }
+export class AdminLayoutModule {}
