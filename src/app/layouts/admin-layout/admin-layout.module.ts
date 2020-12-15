@@ -18,6 +18,7 @@ import { MemberCardComponent } from 'src/app/pages/members/member-card/member-ca
 import { MemberDetailComponent } from 'src/app/pages/members/member-detail/member-detail.component';
 import { PhotosComponent } from 'src/app/pages/user-profile/photos/photos.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { DateAgoPipe } from 'src/app/core/pipes/date-ago.pipe';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -42,6 +43,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     MemberListComponent,
     MemberCardComponent,
     MemberDetailComponent,
+    DateAgoPipe,
   ],
 })
 export class AdminLayoutModule {}

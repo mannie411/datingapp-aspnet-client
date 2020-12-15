@@ -20,6 +20,7 @@ import { MemberDetailResolver } from './core/resolvers/members-detail.resolver';
 import { MemberListResolver } from './core/resolvers/members-list.resolver';
 import { MemberEditResolver } from './core/resolvers/member-edit.resolver';
 import { FileUploadModule } from 'ng2-file-upload';
+import { DateAgoPipe } from './core/pipes/date-ago.pipe';
 
 @NgModule({
   imports: [
@@ -52,7 +53,12 @@ import { FileUploadModule } from 'ng2-file-upload';
     }),
     FileUploadModule,
   ],
-  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
+  declarations: [
+    AppComponent,
+    AdminLayoutComponent,
+    AuthLayoutComponent,
+    // DateAgoPipe,
+  ],
   providers: [
     AuthService,
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults },

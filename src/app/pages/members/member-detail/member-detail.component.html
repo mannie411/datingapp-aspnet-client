@@ -54,6 +54,22 @@
               </div>
             </div>
           </div>
+          <div class="row">
+            <div class="col">
+              <div class="card-profile-stats d-flex justify-content-center ">
+                <div>
+                  <span class="heading ">{{user.createdAt | dateAgo }} </span>
+
+                  <span class="description">Last Active</span>
+                </div>
+                <div>
+                  <span class="heading">{{user.createdAt | date: 'yyyy' }}</span>
+                  <span class="description">Joined</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
           <div class="text-center">
             <h3>
               {{user?.knownAs}}<span class="font-weight-light">, {{user.age}} </span>
