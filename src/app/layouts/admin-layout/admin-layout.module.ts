@@ -19,6 +19,7 @@ import { MemberDetailComponent } from 'src/app/pages/members/member-detail/membe
 import { PhotosComponent } from 'src/app/pages/user-profile/photos/photos.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { DateAgoPipe } from 'src/app/core/pipes/date-ago.pipe';
+import { ListComponent } from 'src/app/pages/list/list.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -28,7 +29,6 @@ import { DateAgoPipe } from 'src/app/core/pipes/date-ago.pipe';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgbModule,
     ClipboardModule,
     FileUploadModule,
     NgbModule,
@@ -43,6 +43,7 @@ import { DateAgoPipe } from 'src/app/core/pipes/date-ago.pipe';
     MemberListComponent,
     MemberCardComponent,
     MemberDetailComponent,
+    ListComponent,
     DateAgoPipe,
   ],
 })

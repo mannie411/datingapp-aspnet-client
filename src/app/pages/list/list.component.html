@@ -1,3 +1,54 @@
-<p>
-  list works!
-</p>
+<div class="header bg-gradient-danger pb-2 pt-5 pt-lg-8">
+
+  <div class="header-body d-flex justify-content-center mt-5">
+
+
+
+  </div>
+
+  <div class="container">
+    <blockquote class="blockquote text-center text-light">
+      <!-- <p class="mb-0">Your matches - {{pagination.totalItems}} found</p> -->
+    </blockquote>
+  </div>
+
+</div>
+
+<div class="container">
+  <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="likesParams">
+    <label ngbButtonLabel class="btn-primary">
+      <input ngbButton type="radio" value="Likers" (click)="loadUser()"> My Likers
+    </label>
+    <label ngbButtonLabel class="btn-primary">
+      <input ngbButton type="radio" value="Likees" (click)="loadUser()"> My Likes
+    </label>
+  </div>
+</div>
+
+<blockquote class="blockquote">
+  <p class="mb-0">{{likesParams === 'Likers' ? 'Members who like me' : 'Members I\'ve liked'}} :
+    {{pagination.totalItems}}</p>
+</blockquote>
+
+<div class="container d-flex flex-row">
+  <div class="row">
+    <div class="col" *ngFor="let user of users">
+      <div class="card" style="width: 18rem;">
+        <div class="card-inner card-img ">
+          <div class="card-body ">
+            <h2>Al Pacino</h2>
+            <div class="icons">
+              <i class="fa fa-codepen" aria-hidden="true"></i>
+              <i class="fa fa-instagram" aria-hidden="true"></i>
+              <i class="fa fa-dribbble" aria-hidden="true"></i>
+              <i class="fa fa-twitter" aria-hidden="true"></i>
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

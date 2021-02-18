@@ -1,5 +1,5 @@
-<div class="card-container  mb-4 mb-xl-0" [routerLink]="[user.id]">
-  <div class="cover-photo">
+<div class="card-container  mb-4 mb-xl-0">
+  <div class="cover-photo" [routerLink]="[user.id]">
     <img src="{{user.photoUrl ? user.photoUrl : defaultImg}}" class="profile">
   </div>
   <div class="profile-name">{{user.knownAs}}</div>
@@ -7,9 +7,9 @@
   <button class="msg-btn">Message</button>
   <button class="follow-btn">Following</button>
   <div>
-    <i class="fa fa-facebook-f"></i>
-    <i class="fa fa-instagram"></i>
-    <i class="fa fa-youtube"></i>
-    <i class="fa fa-twitter"></i>
+    <i class="ni ni-favourite-28" (click)="likeUser(user.id)"></i>
+    <!--<i class="fa fa-instagram"></i>
+     <i class="fa fa-youtube"></i>
+    <i class="fa fa-twitter"></i> -->
   </div>
 </div>

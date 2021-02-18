@@ -13,20 +13,34 @@ import { MemberDetailResolver } from 'src/app/core/resolvers/members-detail.reso
 import { MemberListResolver } from 'src/app/core/resolvers/members-list.resolver';
 import { MemberEditResolver } from 'src/app/core/resolvers/member-edit.resolver';
 import { UnsavedGuardService } from 'src/app/core/guards/unsaved-guard.service';
+import { ListsResolver } from 'src/app/core/resolvers/lists.resolver';
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'profile', component: UserProfileComponent, resolve: { user: MemberEditResolver } },
-    {
-        path: 'profile/edit', component: UserProfileComponent,
-        resolve: { user: MemberEditResolver },
-        canDeactivate: [UnsavedGuardService]
-    },
-    { path: 'tables', component: TablesComponent },
-    { path: 'icons', component: IconsComponent },
-    { path: 'maps', component: MapsComponent },
-    { path: 'members', component: MemberListComponent, resolve: { users: MemberListResolver } },
-    { path: 'members/:id', component: MemberDetailComponent, resolve: { user: MemberDetailResolver } },
-    { path: 'list', component: ListComponent },
-    { path: 'messages', component: MessagesComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  {
+    path: 'profile',
+    component: UserProfileComponent,
+    resolve: { user: MemberEditResolver },
+  },
+  {
+    path: 'profile/edit',
+    component: UserProfileComponent,
+    resolve: { user: MemberEditResolver },
+    canDeactivate: [UnsavedGuardService],
+  },
+  { path: 'tables', component: TablesComponent },
+  { path: 'icons', component: IconsComponent },
+  { path: 'maps', component: MapsComponent },
+  {
+    path: 'members',
+    component: MemberListComponent,
+    resolve: { users: MemberListResolver },
+  },
+  {
+    path: 'members/:id',
+    component: MemberDetailComponent,
+    resolve: { user: MemberDetailResolver },
+  },
+  { path: 'list', component: ListComponent, resolve: { user: ListsResolver } },
+  { path: 'messages', component: MessagesComponent },
 ];

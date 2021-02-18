@@ -1,4 +1,8 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpResponse,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -23,7 +27,12 @@ export class UserService {
   //   responseType: 'json' as 'json'
   // };
 
-  getUsers(page?: number, pageItem?: number, userParams?: any) {
+  getUsers(
+    page?: number,
+    pageItem?: number,
+    userParams?: any,
+    likesParams?: any
+  ) {
     const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<
       User[]
     >();
@@ -34,12 +43,22 @@ export class UserService {
     if (userParams != null) {
       query += `minAge=${userParams.minAge}&maxAge=${userParams.maxAge}&gender=${userParams.gender}`;
     }
+    if (likesParams === 'Likers') {
+      query += `Likers=true`;
+    }
+    if (likesParams === 'Likees') {
+      query += `Likees=true`;
+    }
 
     return this.http
-      .get(`${this.apiUrl}users${query}`, { observe: 'response' })
+      .get(`${this.apiUrl}users`, {
+        observe: 'response' as 'body',
+        params: { query },
+      })
       .pipe(
-        tap((res) => {
+        tap((res: HttpResponse<any>) => {
           paginatedResult.result = res.body as User[];
+
           if (res.headers.get('Pagination') != null) {
             paginatedResult.pagination = JSON.parse(
               res.headers.get('Pagination')
@@ -75,6 +94,12 @@ export class UserService {
   setMainPhoto(userId: number, photoId: number) {
     return this.http
       .post(`${this.apiUrl}users/${userId}/photo/setmain/${photoId}`, {})
+      .pipe(catchError(this.handleError));
+  }
+
+  likeUser(userId: number, recipientId: number) {
+    return this.http
+      .post(`${this.apiUrl}users/${userId}/like/${recipientId}`, {})
       .pipe(catchError(this.handleError));
   }
 

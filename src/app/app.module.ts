@@ -21,17 +21,17 @@ import { MemberListResolver } from './core/resolvers/members-list.resolver';
 import { MemberEditResolver } from './core/resolvers/member-edit.resolver';
 import { FileUploadModule } from 'ng2-file-upload';
 import { DateAgoPipe } from './core/pipes/date-ago.pipe';
+import { ListsResolver } from './core/resolvers/lists.resolver';
 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
     NgbModule,
     SnotifyModule,
     JwtModule.forRoot({
@@ -64,6 +64,7 @@ import { DateAgoPipe } from './core/pipes/date-ago.pipe';
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
     SnotifyService,
     UserService,
+    ListsResolver,
     MemberDetailResolver,
     MemberListResolver,
     MemberEditResolver,
