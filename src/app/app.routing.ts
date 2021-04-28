@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
@@ -12,7 +12,7 @@ import { AuthGuardService } from './core/guards/auth-guard.service';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'admin/dashboard',
+    redirectTo: 'user/dashboard',
     pathMatch: 'full',
   },
   {
@@ -23,8 +23,8 @@ const routes: Routes = [
         path: '',
         loadChildren: () => AdminLayoutModule,
         canActivate: [AuthGuardService],
-      }
-    ]
+      },
+    ],
   },
   {
     path: '',
@@ -32,14 +32,14 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () => AuthLayoutModule
-      }
-    ]
+        loadChildren: () => AuthLayoutModule,
+      },
+    ],
   },
   {
     path: '**',
-    redirectTo: 'admin/dashboard'
-  }
+    redirectTo: '/login',
+  },
 ];
 
 @NgModule({
@@ -48,10 +48,9 @@ const routes: Routes = [
     BrowserModule,
     RouterModule.forRoot(routes, {
       useHash: false,
-      preloadingStrategy: PreloadAllModules
-    })
+      preloadingStrategy: PreloadAllModules,
+    }),
   ],
-  exports: [
-  ],
+  exports: [],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
